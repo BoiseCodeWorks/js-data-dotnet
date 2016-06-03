@@ -7,8 +7,8 @@
 
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>effcdff4-7438-483a-bd3d-35dc4bdf0bc0</ProjectGuid>
-    <RootNamespace>js_data_sharp</RootNamespace>
+    <ProjectGuid>a76eb7ae-3d55-4dd1-b4a4-5858ecc42df6</ProjectGuid>
+    <RootNamespace>Examples.Shared</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
