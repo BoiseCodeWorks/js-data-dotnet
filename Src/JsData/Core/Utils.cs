@@ -5,10 +5,37 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Reflection;
+
 namespace JsData
 {
 	public static class Utils
 	{
+		public static void MergeWith<T>(this T primary, T secondary)
+		{
+			//Utils.ObjectDiffPatch.PatchObject(primary, JObject.FromObject(secondary));
+			foreach (var pi in typeof(T).GetProperties())
+			{
+				var priValue = pi.GetGetMethod().Invoke(primary, null);
+				var secValue = pi.GetGetMethod().Invoke(secondary, null);
+				if (priValue == null || priValue != secValue || (pi.PropertyType.IsInstanceOfType(Activator.CreateInstance(pi.PropertyType))))
+				{
+					pi.GetSetMethod().Invoke(primary, new object[] { secValue });
+				}
+			}
+
+			//var typeB = typeof (T);
+			//foreach (PropertyInfo property in secondary.GetType().GetProperties())
+			//{
+			//	if (!property.CanRead || (property.GetIndexParameters().Length > 0))
+			//		continue;
+
+			//	PropertyInfo other = typeB.GetProperty(property.Name);
+			//	if ((other != null) && (other.CanWrite))
+			//		other.SetValue(primary, property.GetValue(secondary, null), null);
+			//}
+		}
+
 		public class ObjectDiffPatch
 		{
 			private const string PREFIX_ARRAY_SIZE = "@@ Count";

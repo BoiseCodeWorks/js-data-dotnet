@@ -16,8 +16,9 @@ namespace JsData
 		object Create(string resource, dynamic payload, IJsOptions opts = null);
 		object Update(string resource, object id, dynamic payload, IJsOptions opts = null);
 
-		void Map<T>(string name, Action<IMapperConfig<T>> mapperConfig);
-		void Map<T>(string name, IMapper<T> mapper);
+		void Map<T>(string name, Action<IMapperConfig<T>> mapperConfig = null) where T : class;
+		void Map<T>(string name, IMapper<T> mapper) where T : class;
+		void Map<T>() where T : class;
 	}
 
 	public class DataStore : IDataStore
@@ -75,19 +76,25 @@ namespace JsData
 		{
 			return GetMapper(resource).Update(id, payload, opts);
 		}
-
-		public void Map<T>(string name, Action<IMapperConfig<T>> config = null)
+		public void Map<T>(string name, Action<IMapperConfig<T>> config = null) where T : class
 		{
-
+			name = name.ToLower();
 			var mapperConfig = new MapperConfig<T>();
 			config?.Invoke(mapperConfig);
 			_mappers[name] = (IMapper<object>)new Mapper<T>(name, Adapter, mapperConfig);
 
 		}
 
-		public void Map<T>(string name, IMapper<T> mapper)
+		public void Map<T>(string name, IMapper<T> mapper) where T : class
 		{
+			name = name.ToLower();
 			_mappers[name] = (IMapper<object>)mapper;
+		}
+
+		public void Map<T>() where T : class
+		{
+			var name = typeof(T).Name.ToLower();
+			Map<T>(name);
 		}
 	}
 }

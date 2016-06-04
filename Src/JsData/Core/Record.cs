@@ -10,6 +10,7 @@ namespace JsData
 		public IDictionary<string, object> _Json { get; set; }
 
 		[JsonIgnore]
+
 		public string Json
 		{
 			get { return JsonConvert.SerializeObject(_Json); }

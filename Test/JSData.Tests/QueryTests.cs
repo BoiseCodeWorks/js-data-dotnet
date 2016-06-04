@@ -61,6 +61,7 @@ namespace JSData.Tests
 		[TestCase(">=", 10, "id", 11)]
 		[TestCase("<", 10, "id", 9)]
 		[TestCase("<=", 10, "id", 10)]
+		[TestCase(">=", 100, "id", 0)]
 		public void OpCompareOpsTest(string op, object value, string field, int expectedCount)
 		{
 			var actual = _boards.Where(JsQuery.Ops[op](field, value)).ToList();

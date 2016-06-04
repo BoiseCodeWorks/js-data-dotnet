@@ -58,6 +58,7 @@
     <Compile Include="Core\InMemoryAdapter.cs" />
     <Compile Include="Core\Mapper.cs" />
     <Compile Include="Core\MapperConfig.cs" />
+    <Compile Include="Core\Mvc\JsDataController.cs" />
     <Compile Include="Core\Record.cs" />
     <Compile Include="Core\Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

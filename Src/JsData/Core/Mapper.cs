@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace JsData
 {
-	public interface IMapper<out T>
+	public interface IMapper<out T> where T : class
 	{
 		IQueryable<T> FindAll(IJsOptions opts = null);
 		T Find(object id, IJsOptions opts = null);
@@ -17,7 +17,7 @@ namespace JsData
 		string IdAttribute { get; set; }
 	}
 
-	public class Mapper<T> : IMapper<T>
+	public class Mapper<T> : IMapper<T> where T : class
 	{
 		public string Name { get; set; }
 		public string IdAttribute { get; set; } = "Id";

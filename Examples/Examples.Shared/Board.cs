@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -13,14 +14,34 @@ namespace Examples.Shared
 		public int Id { get; set; }
 		public string Title { get; set; }
 		public string Description { get; set; }
-		public List<string> Colors { get; set; }
-		public int GroupId { get; set; }
+		public virtual ICollection<Pin> Pins { get; set; }
 	}
+
+	public class Post : Record
+	{
+		public int Id { get; set; }
+		public string Title { get; set; }
+		public string Content { get; set; }
+		public DateTime CreatedDate { get; set; }
+		public virtual ICollection<Pin> Pins { get; set; }
+	}
+
+	public class Pin : Record
+	{
+		public int Id { get; set; }
+		public int BoardId { get; set; }
+		public int PostId { get; set; }
+		public DateTime CreatedDate { get; set; }
+		public Board Board { get; set; }
+		public Post Post { get; set; }
+	}
+
 
 	public class Record
 	{
 
 		[JsonExtensionData]
+		[NotMapped]
 		public IDictionary<string, object> _Json { get; set; }
 
 		[JsonIgnore]

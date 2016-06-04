@@ -6,6 +6,7 @@
 			"version": "1.0.0-rc2-3002702"
 		},
 		"Newtonsoft.Json": "8.0.3",
+		"Microsoft.AspNetCore.Mvc": "1.0.0-rc2-final",
 		"System.Linq.Dynamic.Core": "1.0.3.1"
 	},
 
